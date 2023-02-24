@@ -1,0 +1,7 @@
+This may be a .txt file,
+but this file does not contain proper bass tabs.
+----
+----
+------1-23--123-
+--12-2-31-
+
