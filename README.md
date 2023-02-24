@@ -1,2 +1,2 @@
-# btmx
-Text-Based Bass Tabs to MusicXML Converter
+# BTMX: Bass Tabs to MusicXML Converter
+(Text-Based) Bass Tabs to MusicXML Converter
