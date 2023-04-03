@@ -1,4 +1,7 @@
 import os
+import re
+from basstabxmlify import MidiG, MidiD, MidiA, MidiE
+from scorebuilder import slicer, to_note
 
 def process_tab(filename):
   g = []
@@ -27,6 +30,10 @@ def process_tab(filename):
       print(d_measures)
       print(a_measures)
       print(e_measures)
+      g_midi, d_midi, a_midi, e_midi = to_midi(g_measures, d_measures, a_measures, e_measures)
+      g_sliced, d_sliced, a_sliced, e_sliced = slicer(g_midi, d_midi, a_midi, e_midi)
+      g_notes, d_notes, a_notes, e_notes = to_note(g_sliced, d_sliced, a_sliced, e_sliced)
+      
       return("Imported File: {}".format(os.path.split(filename)[1]))
     else:
       return("{} does not contain bass tabs!\nPlease select a valid .txt file.".format(os.path.split(filename)[1]))
@@ -58,6 +65,34 @@ def clean_measures(string):
     else:
       measures[i] = ''
   measures = [x for x in measures if x] #removing empty string
+  measures = [x for x in measures ]
+  
+  regex = re.compile('[^\d\-]+') 
+  for i in range(len(measures)):
+    measures[i] = regex.sub('-', measures[i])
+    print('line: {}'.format(regex.sub('-', measures[i])))  #replace non-digits and non-dashes with dashes
   return(measures)
 
+def to_midi(g_list, d_list, a_list, e_list): #to replace regular fret values with respective midi values
+  g_midi, d_midi, a_midi, e_midi = ([] for i in range(4))
+
+  print("\nMIDI CONVERSIONS:\n")
+
+  for m in g_list:
+    g_midi.append(re.sub(r'\d+', lambda x: MidiG[x.group()], m))
+  print(g_midi)
+
+  for m in d_list:
+    d_midi.append(re.sub(r'\d+', lambda x: MidiD[x.group()], m))
+  print(d_midi)
+
+  for m in a_list:
+    a_midi.append(re.sub(r'\d+', lambda x: MidiA[x.group()], m))
+  print(a_midi)
+
+  for m in e_list:
+    e_midi.append(re.sub(r'\d+', lambda x: MidiE[x.group()], m))
+  print(e_midi)
+
+  return g_midi, d_midi, a_midi, e_midi
 
