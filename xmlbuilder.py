@@ -7,27 +7,29 @@ def clean_notes(g_notes, d_notes, a_notes, e_notes):
     temp = []
     for i in range(0,len(g_notes)):
         temp = []
-        for j in range(0,len(g_notes[i])):
-            # print("{} at {} {}".format(g_notes[i][j],i,j))
-            # print("{} at {} {}".format(d_notes[i][j],i,j))
-            # print("{} at {} {}".format(a_notes[i][j],i,j))
-            # print("{} at {} {}".format(e_notes[i][j],i,j))
-            if g_notes[i][j] == '-':
-                if j < len(d_notes[i]):
-                    if d_notes[i][j] == '-':
-                        if j < len(a_notes[i]):
-                            if a_notes[i][j] == '-':
-                                if j < len(e_notes[i]):
-                                    if e_notes[i][j] == '-': pass
-                                    else: temp.append(e_notes[i][j])
-                                else: pass
-                            else: temp.append(a_notes[i][j])
-                        else: pass
-                    else: temp.append(d_notes[i][j])
-                else: pass
-            else: temp.append(g_notes[i][j])               
-        print(temp)
-        flat.append(temp)
+        if i < len(d_notes) and i < len(a_notes) and i < len(e_notes):
+            for j in range(0,len(g_notes[i])):
+                # print("{} at {} {}".format(g_notes[i][j],i,j))
+                # print("{} at {} {}".format(d_notes[i][j],i,j))
+                # print("{} at {} {}".format(a_notes[i][j],i,j))
+                # print("{} at {} {}".format(e_notes[i][j],i,j))
+                if g_notes[i][j] == '-':
+                    if j < len(d_notes[i]):
+                        if d_notes[i][j] == '-':
+                            if j < len(a_notes[i]):
+                                if a_notes[i][j] == '-':
+                                    if j < len(e_notes[i]):
+                                        if e_notes[i][j] == '-': pass
+                                        else: temp.append(e_notes[i][j])
+                                    else: pass
+                                else: temp.append(a_notes[i][j])
+                            else: pass
+                        else: temp.append(d_notes[i][j])
+                    else: pass
+                else: temp.append(g_notes[i][j])               
+            print(temp)
+            flat.append(temp)
+        else: pass
     print(flat)
     return flat
 
