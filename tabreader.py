@@ -1,7 +1,10 @@
 import os
 import re
-from basstabxmlify import MidiG, MidiD, MidiA, MidiE
+from notedictionaries import MidiG, MidiD, MidiA, MidiE
 from scorebuilder import slicer, to_note
+from xmlbuilder import clean_notes, xml_build
+from xml.dom import minidom
+import xml.etree.ElementTree as ET
 
 def process_tab(filename):
   g = []
@@ -26,14 +29,21 @@ def process_tab(filename):
       d_measures = clean_measures(d)
       a_measures = clean_measures(a)
       e_measures = clean_measures(e)
-      print(g_measures)
-      print(d_measures)
-      print(a_measures)
-      print(e_measures)
+      # print(g_measures)
+      # print(d_measures)
+      # print(a_measures)
+      # print(e_measures)
+      # TO MIDI VALUES:
       g_midi, d_midi, a_midi, e_midi = to_midi(g_measures, d_measures, a_measures, e_measures)
+      # EACH MEASURE SEPARATED, EACH TIMESLICE/MIDI VALUE SEPARATED:
       g_sliced, d_sliced, a_sliced, e_sliced = slicer(g_midi, d_midi, a_midi, e_midi)
+      # MIDI -> UNIVERSAL NOTE:
       g_notes, d_notes, a_notes, e_notes = to_note(g_sliced, d_sliced, a_sliced, e_sliced)
+      seq = clean_notes(g_notes, d_notes, a_notes, e_notes)
+      xml_build(seq)
+
       
+      #Tooltip-like text in GUI:
       return("Imported File: {}".format(os.path.split(filename)[1]))
     else:
       return("{} does not contain bass tabs!\nPlease select a valid .txt file.".format(os.path.split(filename)[1]))
