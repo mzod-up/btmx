@@ -23,7 +23,7 @@ window['background']='#121315'
 frame = tk.Frame(window, width=200, height=200)
 frame.pack()
 frame.place(relx=0.5, rely=0.5, anchor='w')
-img = ImageTk.PhotoImage(Image.open("betamax.jpg"))
+img = ImageTk.PhotoImage(Image.open("resources/betamax.jpg"))
 label = tk.Label(frame, image=img, borderwidth=0, highlightthickness=0)
 label.pack()
 
@@ -37,12 +37,12 @@ import_button = tk.Button(window,
                             bg='#1F1F1D',
                             command=ImportTab)
 import_button.pack()
-import_button.place(relx=0.25, rely=0.1, anchor='center')
+import_button.place(relx=0.25, rely=0.5, anchor='center')
 
 text_frame = tk.Frame(window, width=100, height=100, bg='#121315')
 text_frame.pack()
-text_frame.place(relx=0.25, rely=0.18, anchor='center')
-info_label = tk.Label(text_frame, text='', font=info_labelfont, fg='white', bg='#121315')
+text_frame.place(relx=0.25, rely=0.60, anchor='center')
+info_label = tk.Label(text_frame, text='', font=info_labelfont, wraplength=200, fg='white', bg='#121315')
 info_label.pack()
 
 

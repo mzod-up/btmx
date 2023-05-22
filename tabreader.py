@@ -40,7 +40,7 @@ def process_tab(filename):
       # MIDI -> UNIVERSAL NOTE:
       g_notes, d_notes, a_notes, e_notes = to_note(g_sliced, d_sliced, a_sliced, e_sliced)
       seq = clean_notes(g_notes, d_notes, a_notes, e_notes)
-      xml_build(seq)
+      xml_build(seq,filename)
 
       
       #Tooltip-like text in GUI:
@@ -80,29 +80,29 @@ def clean_measures(string):
   regex = re.compile('[^\d\-]+') 
   for i in range(len(measures)):
     measures[i] = regex.sub('-', measures[i])
-    print('line: {}'.format(regex.sub('-', measures[i])))  #replace non-digits and non-dashes with dashes
+    #print('line: {}'.format(regex.sub('-', measures[i])))  #replace non-digits and non-dashes with dashes
   return(measures)
 
 def to_midi(g_list, d_list, a_list, e_list): #to replace regular fret values with respective midi values
   g_midi, d_midi, a_midi, e_midi = ([] for i in range(4))
 
-  print("\nMIDI CONVERSIONS:\n")
+  #print("\nMIDI CONVERSIONS:\n")
 
   for m in g_list:
     g_midi.append(re.sub(r'\d+', lambda x: MidiG[x.group()], m))
-  print(g_midi)
+  #print(g_midi)
 
   for m in d_list:
     d_midi.append(re.sub(r'\d+', lambda x: MidiD[x.group()], m))
-  print(d_midi)
+  #print(d_midi)
 
   for m in a_list:
     a_midi.append(re.sub(r'\d+', lambda x: MidiA[x.group()], m))
-  print(a_midi)
+  #print(a_midi)
 
   for m in e_list:
     e_midi.append(re.sub(r'\d+', lambda x: MidiE[x.group()], m))
-  print(e_midi)
+  #print(e_midi)
 
   return g_midi, d_midi, a_midi, e_midi
 

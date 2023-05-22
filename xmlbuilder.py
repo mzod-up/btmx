@@ -27,16 +27,16 @@ def clean_notes(g_notes, d_notes, a_notes, e_notes):
                         else: temp.append(d_notes[i][j])
                     else: pass
                 else: temp.append(g_notes[i][j])               
-            print(temp)
+            #print(temp)
             flat.append(temp)
         else: pass
-    print(flat)
+    #print(flat)
     return flat
 
-def xml_build(seq):
+def xml_build(seq,filename):
     m_count = 1
 
-    base = ET.parse('template.xml')
+    base = ET.parse('resources/template.xml')
     root = base.getroot() #<score-partwise>
     part = ET.SubElement(root,'part')
     part.set('id', 'P1')
@@ -56,7 +56,7 @@ def xml_build(seq):
             m_count += 1
         else: m_count += 1
         for n in m:
-            print("building {}".format(globals()[n]['step']))
+            #print("building {}".format(globals()[n]['step']))
             note = ET.SubElement(measure, 'note')
             pitch = ET.SubElement(note, 'pitch')
             step = ET.SubElement(pitch, 'step')
@@ -68,5 +68,5 @@ def xml_build(seq):
 
     #https://stackoverflow.com/questions/28813876/how-do-i-get-pythons-elementtree-to-pretty-print-to-an-xml-file
     prettier = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
-    with open("scratch.xml", "w") as f:
+    with open("{}.xml".format(filename[:-4]), "w") as f:
         f.write(prettier)
