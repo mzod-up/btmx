@@ -63,6 +63,8 @@ def xml_build(seq,filename):
             step.text = '{}'.format(globals()[n]['step'])
             octave = ET.SubElement(pitch, 'octave')
             octave.text = '{}'.format(globals()[n]['octave'])
+            alter = ET.SubElement(pitch, 'alter')
+            alter.text = '{}'.format(globals()[n]['alter'])
             ET.SubElement(note, 'duration').text = '1'
             ET.SubElement(note, 'stem').text = 'none'
 
