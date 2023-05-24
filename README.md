@@ -2,7 +2,7 @@
 
 BTMX is a lightweight program that is capable of generating MusicXML files from text-based bass guitar tablature. This program is fully-written in a cross-platform language—Python—and is therefore designed to be able to run on Windows, Mac, and Linux systems.
 
-**Disclaimer:** Due to the limitations in rhythmic expression and the general lack of consistency in bass tablature, BTMX-generated MusicXML files follow a **stemless notation**—placing the main focus on providing accurate translations of bass tablature notes into their standard music **pitch equivalents**, and putting less concern on approximating the actual rhythm of the music. Actual note durations and rhythm may be further adjusted after importing the output MusicXML files within any compatible music sheet editing software.
+**Disclaimer:** Due to the limitations in rhythmic expression and the general lack of consistency in bass tablature, BTMX-generated MusicXML files follow a **stemless notation**—placing the main focus on providing accurate translations of bass tablature notes into their standard music **pitch equivalents**, and putting less concern on approximating the actual rhythm of the music. Actual note durations and rhythm may be further adjusted after importing the output MusicXML files within any compatible music sheet editing application.
 
 ---
 
