@@ -32,10 +32,10 @@ BTMX is a lightweight program that is capable of generating MusicXML files from 
 
 3. When program loads, click the "Import Bass Tab" button to prompt file selection.
 ![image](https://github.com/mzod-up/btmx/assets/91300690/67c37150-5049-4057-911a-2765e7509e18)
-
-5. Select a valid .txt file containing text-based bass tabs to import.
-6. An error message will be displayed underneath the "Import Tab" button if the selected file does not contain valid tabs.
-8. If a valid .txt file is selected and the import is successful, BTMX will generate a MusicXML file **(Format: filename.xml)** that will be exported to the directory of the original .txt file. An export message will also be displayed.
+4. Select a .txt file containing text-based bass tabs to import.
+5. An error message will be displayed underneath the "Import Tab" button if the selected file does not contain valid tabs.
+![image](https://github.com/mzod-up/btmx/assets/91300690/730b6e10-6dcc-4f50-8853-7858c9f15d01)
+6. If a valid .txt file is selected and the import is successful, BTMX will generate a MusicXML file **(Format: filename.xml)** that will be exported to the directory of the original .txt file. An export message will also be displayed.
 
 ---
 
