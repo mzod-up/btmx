@@ -1,8 +1,9 @@
+import time
+import os
 import tkinter as tk
 import tkinter.font as font
 from tkinter.filedialog import askopenfilename
 from PIL import ImageTk, Image
-import time, os
 from tabreader import process_tab
 
 def ImportTab(event=None):
@@ -10,9 +11,9 @@ def ImportTab(event=None):
     if(filename):
         info_label.config(text=process_tab(filename))
     else:
-        info_label.config(text = "Import cancelled.")
+        info_label.config(text="Import cancelled.")
         print("Import cancelled.")
-    window.after(4000,lambda:info_label.config(text=''))
+    window.after(5000,lambda:info_label.config(text=''))
 
 window = tk.Tk()
 window.resizable(False, False)
@@ -42,8 +43,12 @@ import_button.place(relx=0.25, rely=0.48, anchor='center')
 text_frame = tk.Frame(window, width=100, height=100, bg='#121315')
 text_frame.pack()
 text_frame.place(relx=0.25, rely=0.60, anchor='center')
-info_label = tk.Label(text_frame, text='', font=info_labelfont, wraplength=200, fg='white', bg='#121315')
+info_label = tk.Label(text_frame,
+                        text='',
+                        font=info_labelfont,
+                        wraplength=200,
+                        fg='white',
+                        bg='#121315')
 info_label.pack()
-
 
 window.mainloop()

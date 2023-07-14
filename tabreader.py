@@ -1,10 +1,10 @@
 import os
 import re
+from xml.dom import minidom
+import xml.etree.ElementTree as ET
 from notedictionaries import MidiG, MidiD, MidiA, MidiE
 from scorebuilder import slicer, to_note
 from xmlbuilder import clean_notes, xml_build
-from xml.dom import minidom
-import xml.etree.ElementTree as ET
 
 def process_tab(filename):
   g = []
@@ -29,22 +29,21 @@ def process_tab(filename):
       d_measures = clean_measures(d)
       a_measures = clean_measures(a)
       e_measures = clean_measures(e)
-      # print(g_measures)
-      # print(d_measures)
-      # print(a_measures)
-      # print(e_measures)
-      # TO MIDI VALUES:
+ 
+      # Converts tab note values to MIDI note values:
       g_midi, d_midi, a_midi, e_midi = to_midi(g_measures, d_measures, a_measures, e_measures)
-      # EACH MEASURE SEPARATED, EACH TIMESLICE/MIDI VALUE SEPARATED:
+
+      # Turns each measure into an array of hyphens and MIDI notes:
       g_sliced, d_sliced, a_sliced, e_sliced = slicer(g_midi, d_midi, a_midi, e_midi)
-      # MIDI -> UNIVERSAL NOTE:
+
+      # Converts MIDI note values to standard note names (e.g., Eb2):
       g_notes, d_notes, a_notes, e_notes = to_note(g_sliced, d_sliced, a_sliced, e_sliced)
       seq = clean_notes(g_notes, d_notes, a_notes, e_notes)
       xml_build(seq,filename)
 
-      
-      #Tooltip-like text in GUI:
-      return("Imported File: {}".format(os.path.split(filename)[1]))
+      #Info text displayed in GUI underneath Import Tab button:
+      print("Exported File: {}.xml".format(os.path.split(filename)[1][:-4]))
+      return("File exported as: {}.xml".format(os.path.split(filename)[1][:-4]))
     else:
       return("{} does not contain bass tabs!\nPlease select a valid .txt file.".format(os.path.split(filename)[1]))
 
@@ -67,42 +66,36 @@ def only_hyphen(str_input):
 
 def clean_measures(string):
   measures = [measure.replace('\n','') for measure in string]
-  measures = [measure.split('|') for measure in measures] #splitting measure by measure symbol |
-  measures = [line for measure in measures for line in measure] #flattening list of lists into list
+  measures = [measure.split('|') for measure in measures] #Splitting measure by measure symbol "|"
+  measures = [line for measure in measures for line in measure] #Flattening list of lists into list
   for i in range(len(measures)):
-    if has_hyphen(measures[i]): #only keeping elements containing hyphens
+    if has_hyphen(measures[i]): #Only keeping elements containing hyphens
       pass
     else:
       measures[i] = ''
-  measures = [x for x in measures if x] #removing empty string
+  measures = [x for x in measures if x] #Removing empty strings
   measures = [x for x in measures ]
   
   regex = re.compile('[^\d\-]+') 
+  #Replaces non-digits and non-hyphens with hyphens
   for i in range(len(measures)):
     measures[i] = regex.sub('-', measures[i])
-    #print('line: {}'.format(regex.sub('-', measures[i])))  #replace non-digits and non-dashes with dashes
   return(measures)
 
-def to_midi(g_list, d_list, a_list, e_list): #to replace regular fret values with respective midi values
+def to_midi(g_list, d_list, a_list, e_list):
   g_midi, d_midi, a_midi, e_midi = ([] for i in range(4))
-
-  #print("\nMIDI CONVERSIONS:\n")
 
   for m in g_list:
     g_midi.append(re.sub(r'\d+', lambda x: MidiG[x.group()], m))
-  #print(g_midi)
 
   for m in d_list:
     d_midi.append(re.sub(r'\d+', lambda x: MidiD[x.group()], m))
-  #print(d_midi)
 
   for m in a_list:
     a_midi.append(re.sub(r'\d+', lambda x: MidiA[x.group()], m))
-  #print(a_midi)
 
   for m in e_list:
     e_midi.append(re.sub(r'\d+', lambda x: MidiE[x.group()], m))
-  #print(e_midi)
 
   return g_midi, d_midi, a_midi, e_midi
 

@@ -9,10 +9,6 @@ def clean_notes(g_notes, d_notes, a_notes, e_notes):
         temp = []
         if i < len(d_notes) and i < len(a_notes) and i < len(e_notes):
             for j in range(0,len(g_notes[i])):
-                # print("{} at {} {}".format(g_notes[i][j],i,j))
-                # print("{} at {} {}".format(d_notes[i][j],i,j))
-                # print("{} at {} {}".format(a_notes[i][j],i,j))
-                # print("{} at {} {}".format(e_notes[i][j],i,j))
                 if g_notes[i][j] == '-':
                     if j < len(d_notes[i]):
                         if d_notes[i][j] == '-':
@@ -27,10 +23,8 @@ def clean_notes(g_notes, d_notes, a_notes, e_notes):
                         else: temp.append(d_notes[i][j])
                     else: pass
                 else: temp.append(g_notes[i][j])               
-            #print(temp)
             flat.append(temp)
         else: pass
-    #print(flat)
     return flat
 
 def xml_build(seq,filename):
@@ -56,7 +50,6 @@ def xml_build(seq,filename):
             m_count += 1
         else: m_count += 1
         for n in m:
-            #print("building {}".format(globals()[n]['step']))
             note = ET.SubElement(measure, 'note')
             pitch = ET.SubElement(note, 'pitch')
             step = ET.SubElement(pitch, 'step')
