@@ -2,9 +2,9 @@
 
 ## About the program
 
-BTMX is a lightweight program that is capable of generating MusicXML files from text-based bass guitar tablature. This program is fully-written in a cross-platform language—Python—and is therefore designed to be able to run on Windows, Mac, and Linux systems.
+BTMX is a lightweight program that is capable of generating MusicXML files from text-based bass guitar tablature.
 
-**Disclaimer:** Due to the limitations in rhythmic expression and the general lack of consistency in bass tablature, BTMX-generated MusicXML files follow the conventions of **stemless notation**—putting the focus on providing accurate translations of bass tablature notes into their standard music **pitch equivalents**, and putting less concern on approximating the actual rhythm of the music. Actual note durations and other rhythmic elements may be further added to the sheet music after importing BTMX's output MusicXML files within any compatible music sheet editing application.
+**Disclaimer:** Due to the limitations in rhythmic expression and the general lack of consistency in text-based bass tablature, BTMX-generated MusicXML files follow the conventions of **[stemless notation](https://www.ars-nova.com/sw3usermanual/alternatenotation.htm#stemlessnotes)**—putting the focus on providing accurate translations of bass tablature notes into their standard music **pitch equivalents**, and putting less concern on approximating the actual rhythm of the music. Actual note durations and other rhythmic elements may be further added to the sheet music after importing BTMX's output MusicXML files within any compatible music sheet editing application.
 
 ---
 
@@ -13,7 +13,7 @@ BTMX is a lightweight program that is capable of generating MusicXML files from 
 ### Downloading the program
 
 1.  Open terminal in the directory BTMX is to be stored in.
-2.  Run the following code to clone the repo:
+2.  Run the following command to clone the repo:
 
     ```
     git clone https://github.com/mzod-up/btmx.git
@@ -24,7 +24,7 @@ BTMX is a lightweight program that is capable of generating MusicXML files from 
 ### Using the program
 
 1. Open terminal in the directory where BTMX was cloned.
-2. Run the following code to start up the program:
+2. Run the following command to start up the program:
 
    ```
    python btmx.py
@@ -33,7 +33,7 @@ BTMX is a lightweight program that is capable of generating MusicXML files from 
 3. When program loads, click the "Import Bass Tab" button to prompt file selection.
 ![image](https://github.com/mzod-up/btmx/assets/91300690/67c37150-5049-4057-911a-2765e7509e18)
 4. Select a .txt file containing text-based bass tabs to import.
-5. An error message will be displayed underneath the "Import Tab" button if the selected file does not contain valid tabs.
+5. An error message will appear underneath the "Import Tab" button if the selected file does not contain valid tabs.
 ![image](https://github.com/mzod-up/btmx/assets/91300690/730b6e10-6dcc-4f50-8853-7858c9f15d01)
 6. If a valid .txt file is selected and the import is successful, BTMX will generate a MusicXML file (*filename.xml* with the filename matching that of the original .txt file) which will be exported to the directory of the original .txt file. An export message will also be displayed in the GUI.
 
